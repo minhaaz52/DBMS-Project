@@ -1,0 +1,62 @@
+.header{
+    flex-direction:row;
+    display: flex;
+    align-items:center;
+    background-color: rgb(9, 139, 111);
+    height:150px;
+    justify-content: space-between;
+    font-size: 25px;
+    padding-right:20px;
+}
+
+.home{
+    flex-direction: row;
+    display:flex;
+    align-items: flex-start;
+    font-size: 20px;
+    height: 30px;
+    padding-left:20px;
+}
+
+.header2{
+    padding-top: 20px;
+    height:100px;
+}
+
+.links{
+    color:azure;
+}
+
+img{
+    height:100%;
+    width:500;
+}
+
+.table{
+    font-size: 20px;
+    width:100%;
+    border-collapse:collapse;
+    height:200px;
+    border:none;
+}
+
+tr:nth-child(even){
+    background-color: rgb(255, 255, 255);
+}
+
+tr:nth-child(odd){
+    background-color: rgb(211, 208, 195);
+}
+
+tr:nth-child(1){
+    background-color: rgb(14, 124, 32);
+}
+
+.forms{
+    display:inline-block;
+    height:100%;
+    width:400px;
+    background-color: rgb(217, 222, 224);
+    border-style: groove;
+    border-radius: 10px;
+}

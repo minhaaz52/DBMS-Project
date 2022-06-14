@@ -1,0 +1,314 @@
+CREATE TABLE `try`.`projects` (
+  `studentId` INT NOT NULL,
+  `rollNo` VARCHAR(45) NOT NULL,
+  `enrollmentNo` VARCHAR(45) NOT NULL,
+  `course` VARCHAR(45) NOT NULL,
+  `branch` VARCHAR(45) NOT NULL,
+  `semester` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `mobileNo` VARCHAR(45) NOT NULL,
+  `dob` VARCHAR(45) NOT NULL,
+  `gender` VARCHAR(45) NOT NULL,
+  `fatherName` VARCHAR(45) NOT NULL,
+  `fmobileNo` VARCHAR(45) NOT NULL,
+  `focc` VARCHAR(45) NOT NULL,
+  `fincome` VARCHAR(45) NOT NULL,
+  `motherName` VARCHAR(45) NOT NULL,
+  `mmobileNo` VARCHAR(45) NOT NULL,
+  `mocc` VARCHAR(45) NOT NULL,
+  `mincome` VARCHAR(45) NOT NULL,
+  `add` VARCHAR(45) NOT NULL,
+  `city` VARCHAR(45) NOT NULL,
+  `dist` VARCHAR(45) NOT NULL,
+  `state` VARCHAR(45) NOT NULL,
+  `code` VARCHAR(45) NOT NULL,
+  `nation` VARCHAR(45) NOT NULL,
+  `cadd` VARCHAR(45) NOT NULL,
+  `ccity` VARCHAR(45) NOT NULL,
+  `cdistrict` VARCHAR(45) NOT NULL,
+  `ccode` VARCHAR(45) NOT NULL,
+  `cnation` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`studentId`));
+
+
+ALTER TABLE `try`.`project` 
+CHANGE COLUMN `rollNo` `rollNo` VARCHAR(45) NULL ,
+CHANGE COLUMN `enrollmentNo` `enrollmentNo` VARCHAR(45) NULL ,
+CHANGE COLUMN `course` `course` VARCHAR(45) NULL ,
+CHANGE COLUMN `branch` `branch` VARCHAR(45) NULL ,
+CHANGE COLUMN `semester` `semester` VARCHAR(45) NULL ,
+CHANGE COLUMN `name` `name` VARCHAR(45) NULL ,
+CHANGE COLUMN `mobileNo` `mobileNo` VARCHAR(45) NULL ,
+CHANGE COLUMN `dob` `dob` VARCHAR(45) NULL ,
+CHANGE COLUMN `gender` `gender` VARCHAR(45) NULL ,
+CHANGE COLUMN `fatherName` `fatherName` VARCHAR(45) NULL ,
+CHANGE COLUMN `fmobileNo` `fmobileNo` VARCHAR(45) NULL ,
+CHANGE COLUMN `focc` `focc` VARCHAR(45) NULL ,
+CHANGE COLUMN `fincome` `fincome` VARCHAR(45) NULL ,
+CHANGE COLUMN `motherName` `motherName` VARCHAR(45) NULL ,
+CHANGE COLUMN `mmobileNo` `mmobileNo` VARCHAR(45) NULL ,
+CHANGE COLUMN `mocc` `mocc` VARCHAR(45) NULL ,
+CHANGE COLUMN `mincome` `mincome` VARCHAR(45) NULL ,
+CHANGE COLUMN `add` `add` VARCHAR(45) NULL ,
+CHANGE COLUMN `city` `city` VARCHAR(45) NULL ,
+CHANGE COLUMN `dist` `dist` VARCHAR(45) NULL ,
+CHANGE COLUMN `state` `state` VARCHAR(45) NULL ,
+CHANGE COLUMN `code` `code` VARCHAR(45) NULL ,
+CHANGE COLUMN `nation` `nation` VARCHAR(45) NULL ,
+CHANGE COLUMN `cadd` `cadd` VARCHAR(45) NULL ,
+CHANGE COLUMN `ccity` `ccity` VARCHAR(45) NULL ,
+CHANGE COLUMN `cdistrict` `cdistrict` VARCHAR(45) NULL ,
+CHANGE COLUMN `ccode` `ccode` VARCHAR(45) NULL ,
+CHANGE COLUMN `cnation` `cnation` VARCHAR(45) NULL ,
+CHANGE COLUMN `email` `email` VARCHAR(45) NULL ,
+CHANGE COLUMN `password` `password` VARCHAR(45) NULL ;
+
+
+ALTER TABLE `try`.`projects` 
+ADD COLUMN `isRegistered` VARCHAR(45) NULL DEFAULT 'false' AFTER `password`;
+
+
+ALTER TABLE `try`.`projects` 
+ADD COLUMN `cstate` VARCHAR(45) NULL AFTER `cdistrict`;
+
+
+
+CREATE TABLE `try`.`admintable` (
+  `staffid` INT NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `isregistered` VARCHAR(45) NULL DEFAULT 'false',
+  `mobile` VARCHAR(45) NULL,
+  PRIMARY KEY (`staffid`));
+
+INSERT INTO `try`.`admintable` (`staffid`, `email`, `password`, `isregistered`, `mobile`) VALUES ('54321', 'staff@abc.com', '12345', '\'true\'', '12345');
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE `dbms_project`.`student` (
+  `studentId` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `rollNo` VARCHAR(45) NULL,
+  `enrollmentNo` VARCHAR(45) NULL,
+  `mobileNo` INT NULL,
+  `deptId` INT NULL,
+  `branch` VARCHAR(45) NULL,
+  `course` VARCHAR(45) NULL,
+  `semester` VARCHAR(45) NULL,
+  `gender` VARCHAR(45) NULL,
+  `dob` DATE NULL,
+  PRIMARY KEY (`studentId`),
+  UNIQUE INDEX `rollNo_UNIQUE` (`rollNo` ASC) VISIBLE,
+  UNIQUE INDEX `enrollmentNo_UNIQUE` (`enrollmentNo` ASC) VISIBLE,
+  UNIQUE INDEX `mobileNo_UNIQUE` (`mobileNo` ASC) VISIBLE);
+
+
+CREATE TABLE `dbms_project`.`student_address` (
+  `studentId` INT NOT NULL,
+  `pAddress` VARCHAR(45) NULL,
+  `pDistrict` VARCHAR(45) NULL,
+  `pCity` VARCHAR(45) NULL,
+  `pCode` VARCHAR(45) NULL,
+  `pState` VARCHAR(45) NULL,
+  `pCountry` VARCHAR(45) NULL,
+  `cAddress` VARCHAR(45) NULL,
+  `cDistrict` VARCHAR(45) NULL,
+  `cCity` VARCHAR(45) NULL,
+  `cCode` VARCHAR(45) NULL,
+  `cState` VARCHAR(45) NULL,
+  `cCountry` VARCHAR(45) NULL,
+  PRIMARY KEY (`studentId`));
+
+
+CREATE TABLE `dbms_project`.`student_parent_details` (
+  `studentId` INT NOT NULL,
+  `fatherName` VARCHAR(45) NULL,
+  `motherName` VARCHAR(45) NULL,
+  `fatherJob` VARCHAR(45) NULL,
+  `motherJob` VARCHAR(45) NULL,
+  `fatherMobileNo` INT NULL,
+  `motherMobileNo` INT NULL,
+  `fatherIncome` VARCHAR(45) NULL,
+  `motherIncome` VARCHAR(45) NULL,
+  PRIMARY KEY (`studentId`),
+  CONSTRAINT `studentId`
+    FOREIGN KEY (`studentId`)
+    REFERENCES `dbms_project`.`student` (`studentId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `dbms_project`.`login` (
+  `studentId` INT NULL,
+  `staffId` INT NULL,
+  `email` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `altEmail` VARCHAR(45) NULL,
+  `isRegistered` VARCHAR(45) NULL,
+  UNIQUE INDEX `studentId_UNIQUE` (`studentId` ASC) VISIBLE,
+  UNIQUE INDEX `staffId_UNIQUE` (`staffId` ASC) VISIBLE;
+
+CREATE TABLE `dbms_project`.`student_login` (
+  `studentId` INT NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `pswd` VARCHAR(45) NULL,
+  `altEmail` VARCHAR(45) NULL,
+  `isRegistered` VARCHAR(45) NULL DEFAULT 'no',
+  PRIMARY KEY (`studentId`));
+
+
+ALTER TABLE `dbms_project`.`student_login` 
+ADD FOREIGN KEY (`studentId`)
+  REFERENCES `dbms_project`.`student` (`studentId`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `dbms_project`.`student_address` 
+ADD
+  FOREIGN KEY (`studentId`)
+  REFERENCES `dbms_project`.`student` (`studentId`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+CREATE TABLE `dbms_project`.`admin_table` (
+  `staffId` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `isRegistered` VARCHAR(45) NULL,
+  PRIMARY KEY (`staffId`));
+
+
+ALTER TABLE `dbms_project`.`student` 
+CHANGE COLUMN `dob` `dob` VARCHAR(45) NULL DEFAULT NULL ;
+
+
+ALTER TABLE `dbms_project`.`student` 
+CHANGE COLUMN `mobileNo` `mobileNo` DOUBLE NULL DEFAULT NULL ;
+
+
+ALTER TABLE `dbms_project`.`student_parent_details` 
+CHANGE COLUMN `fatherMobileNo` `fatherMobileNo` DOUBLE NULL DEFAULT NULL ,
+CHANGE COLUMN `motherMobileNo` `motherMobileNo` DOUBLE NULL DEFAULT NULL ;
+
+
+ALTER TABLE `dbms_project`.`student` 
+DROP INDEX `mobileNo_UNIQUE` ,
+DROP INDEX `enrollmentNo_UNIQUE` ,
+DROP INDEX `rollNo_UNIQUE` ;
+;
+
+
+_____________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+CREATE TABLE `dbms_project`.`staff` (
+  `staffId` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `department` VARCHAR(45) NULL,
+  `post` VARCHAR(45) NULL,
+  `dateOfJoin` VARCHAR(45) NULL,
+  `salary` VARCHAR(45) NULL,
+  `mobileNo` VARCHAR(45) NULL,
+  `dob` VARCHAR(45) NULL,
+  `gender` VARCHAR(45) NULL,
+  `deptId` INT NULL,
+  PRIMARY KEY (`staffId`));
+
+
+
+CREATE TABLE `dbms_project`.`staff_address` (
+  `staffId` INT NOT NULL,
+  `pAddress` VARCHAR(45) NULL,
+  `pCity` VARCHAR(45) NULL,
+  `pDistrict` VARCHAR(45) NULL,
+  `pCode` VARCHAR(45) NULL,
+  `pState` VARCHAR(45) NULL,
+  `pCountry` VARCHAR(45) NULL,
+  `cAddress` VARCHAR(45) NULL,
+  `cCity` VARCHAR(45) NULL,
+  `cDistrict` VARCHAR(45) NULL,
+  `cCode` VARCHAR(45) NULL,
+  `cState` VARCHAR(45) NULL,
+  `cCountry` VARCHAR(45) NULL,
+  PRIMARY KEY (`staffId`),
+  CONSTRAINT `sfaffId`
+    FOREIGN KEY (`staffId`)
+    REFERENCES `dbms_project`.`staff` (`staffId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+
+ALTER TABLE `dbms_project`.`staff` 
+CHANGE COLUMN `mobileNo` `mobileNo` INT NULL DEFAULT NULL ;
+
+
+
+
+
+ALTER TABLE `dbms_project`.`staff_address` 
+ADD 
+  FOREIGN KEY (`staffId`)
+  REFERENCES `dbms_project`.`staff` (`staffId`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `dbms_project`.`staff_address` 
+DROP FOREIGN KEY `staff_address_ibfk_1`;
+ALTER TABLE `dbms_project`.`staff_address` 
+ADD
+  FOREIGN KEY (`staffId`)
+  REFERENCES `dbms_project`.`staff` (`staffId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+
+
+
+CREATE TABLE `dbms_project`.`staff_parent_details` (
+  `staffId` INT NOT NULL,
+  `fatherName` VARCHAR(45) NULL,
+  `fatherMobileNo` INT NULL,
+  `motherName` VARCHAR(45) NULL,
+  `motherMobileNo` INT NULL,
+  PRIMARY KEY (`staffId`),
+  CONSTRAINT `staffId`
+    FOREIGN KEY (`staffId`)
+    REFERENCES `dbms_project`.`staff` (`staffId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+
+CREATE TABLE `dbms_project`.`staff_login` (
+  `staffId` INT NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `pswd` VARCHAR(45) NULL,
+  `altEmail` VARCHAR(45) NULL,
+  `isRegistered` VARCHAR(45) NULL DEFAULT 'no',
+  PRIMARY KEY (`staffId`),
+    FOREIGN KEY (`staffId`)
+    REFERENCES `dbms_project`.`staff` (`staffId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+ALTER TABLE `dbms_project`.`staff` 
+CHANGE COLUMN `mobileNo` `mobileNo` DOUBLE NULL DEFAULT NULL ;
+
+
+ALTER TABLE `dbms_project`.`staff_parent_details` 
+CHANGE COLUMN `fatherMobileNo` `fatherMobileNo` DOUBLE NULL DEFAULT NULL ,
+CHANGE COLUMN `motherMobileNo` `motherMobileNo` DOUBLE NULL DEFAULT NULL ;
+
